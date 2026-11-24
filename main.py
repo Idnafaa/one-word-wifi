@@ -18,8 +18,11 @@ def main():
     word = WORD.strip()
     if not (1 <= len(word) <= 20):
         raise ValueError(f"word must be 1-20 characters, got {len(word)}")
-    if word != word.split()[0] or len(word.split()) != 1:
+    if len(word.split()) != 1:
         raise ValueError("entry must be a single word with no spaces")
+    if not word.isalpha():
+        # The bounty asks for one word: letters only, no punctuation.
+        raise ValueError("entry must be letters only")
     outdir = "/output"
     os.makedirs(outdir, exist_ok=True)
     path = os.path.join(outdir, "entry.txt")
